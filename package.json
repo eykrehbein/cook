@@ -1,0 +1,16 @@
+{
+  "name": "boil",
+  "version": "1.0.0",
+  "description": "Create your own boilerplate files, folders and more",
+  "main": "dist/index.js",
+  "repository": "https://github.com/eykrehbein/boil",
+  "author": "Eyk Rehbein <eykrehbein@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  }
+}
