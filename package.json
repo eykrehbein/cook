@@ -7,6 +7,10 @@
   "author": "Eyk Rehbein <eykrehbein@gmail.com>",
   "license": "MIT",
   "private": false,
+  "preferGlobal": true,
+  "bin": {
+    "cook": "dist/index.js"
+  },
   "scripts": {
     "build": "tsc"
   },
