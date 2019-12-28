@@ -1,6 +1,6 @@
 {
   "name": "@eyk/cook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create your own boilerplate files, folders and more",
   "main": "dist/index.js",
   "repository": "https://github.com/eykrehbein/cook",
