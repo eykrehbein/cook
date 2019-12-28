@@ -35,7 +35,9 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](assets/demo.gif)
+<p align="center">
+ <img src="assets/demo.gif" />
+</p>
 
 ## Key Features
 
@@ -83,7 +85,7 @@ cook create test --copy preparedFolder/
 
 #### Variables
 
-Cook's boilerplates aren't static. You are able to use variables inside of folder names, file names and the files' content.
+Cook's boilerplates aren't static. You can use variables inside of folder names, file names and the files' content.
 
 Syntax:
 
@@ -133,6 +135,7 @@ If you have used any variables, you can specify their value by using flags.
 _Example:_
 
 _Specified variables: `name`, `counter`_
+
 Command:
 
 ```sh
