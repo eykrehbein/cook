@@ -92,7 +92,7 @@ Syntax:
 - `{{ variableName }}` for using variables in file & folder names
 - `c{{ variableName }}` for using variables inside of files
 
-The `c` letter in front of the curly-braces has so special meaning, but it ensures there won't be any conflicts with other curly-braces like in Vue.js files.
+The `c` letter in front of the curly-braces has no special meaning, but it ensures there won't be any conflicts with other curly-braces like in Vue.js files.
 
 _Example of creating a boilerplate for a React.js component:_
 
