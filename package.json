@@ -1,9 +1,9 @@
 {
-  "name": "boil",
+  "name": "@eyk/cook",
   "version": "1.0.0",
   "description": "Create your own boilerplate files, folders and more",
   "main": "dist/index.js",
-  "repository": "https://github.com/eykrehbein/boil",
+  "repository": "https://github.com/eykrehbein/cook",
   "author": "Eyk Rehbein <eykrehbein@gmail.com>",
   "license": "MIT",
   "private": false,
@@ -11,6 +11,17 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/meow": "^5.0.0",
+    "@types/node": "^13.1.1",
     "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "cli-columns": "^3.1.2",
+    "fs-extra": "^8.1.0",
+    "meow": "^6.0.0",
+    "walk-sync": "^2.0.2"
   }
 }

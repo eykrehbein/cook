@@ -13,7 +13,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "esModuleInterop": true
   },
   "include": ["src/index.ts"],
   "exclude": [".git", "node_modules"]
