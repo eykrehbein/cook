@@ -51,6 +51,7 @@ export async function CopyGithubTemplate(
   name: string
 ) {
   await ScanFolderFromGithubTree(tree, targetBoilerplateName, name);
+  return path.join(defaultFolderPath, targetBoilerplateName);
 }
 
 export async function GetGithubFileContent(
@@ -77,7 +78,6 @@ export async function ScanFolderFromGithubTree(
   name: string
 ) {
   for (let item of tree) {
-    console.log('fired');
     const relPath = item.path.split('template/')[1];
     const absPath = path.join(
       defaultFolderPath,
@@ -89,8 +89,6 @@ export async function ScanFolderFromGithubTree(
       fs.ensureFileSync(absPath);
       const content = await GetGithubFileContent(item.download_url);
       fs.writeFileSync(absPath, content);
-
-      console.log('file');
     }
 
     if (item.type === 'dir') {
