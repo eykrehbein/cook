@@ -37,6 +37,9 @@ function CreateBoilerplateRootFolder() {
 exports.CreateBoilerplateRootFolder = CreateBoilerplateRootFolder;
 // get all files and folders in boilerplate
 function GetBoilerplateContentPaths(name) {
+    if (!fs_extra_1.default.existsSync(path_1.default.join(exports.defaultFolderPath, name))) {
+        return null;
+    }
     var treeArray = walk_sync_1.default(path_1.default.join(exports.defaultFolderPath, name));
     var tree = treeArray.map(function (p) {
         var isDir = fs_extra_1.default

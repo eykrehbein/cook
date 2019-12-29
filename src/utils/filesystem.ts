@@ -36,6 +36,9 @@ export function CreateBoilerplateRootFolder() {
 
 // get all files and folders in boilerplate
 export function GetBoilerplateContentPaths(name: string): any {
+  if (!fs.existsSync(path.join(defaultFolderPath, name))) {
+    return null;
+  }
   const treeArray = walk(path.join(defaultFolderPath, name));
   const tree = treeArray.map(p => {
     const isDir = fs

@@ -28,7 +28,10 @@ export default (input: any, flags: any) => {
   // replace any variables in file content
   // store files like they were stored in the boilerplate dir into the target dir
   const tree = GetBoilerplateContentPaths(boilerplateName);
-
+  if (tree === null) {
+    console.log(chalk.red('Boilerplate not found'));
+    process.exit(1);
+  }
   // replace all variables inside of file and folder names
   for (const flag in flags) {
     let regex = new RegExp('{{\\s*' + flag + '\\s*}}', 'gm');
