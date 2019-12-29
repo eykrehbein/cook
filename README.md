@@ -148,6 +148,8 @@ This will copy the named boilerplate into the target dir (or, if not specified, 
 
 If you have used any variables, you can specify their value by using flags.
 
+Optionally, you are able to not use any flags to set variables. You'll be prompted to fill in a value for any missing variable flag.
+
 _Example:_
 
 _Specified variables: `name`, `counter`_
