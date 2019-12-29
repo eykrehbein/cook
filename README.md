@@ -83,6 +83,22 @@ cook create test --copy
 cook create test --copy preparedFolder/
 ```
 
+#### Cloning Boilerplates from Github
+
+The remote boilerplate needs to be stored inside a folder called `template`.
+
+```
+template
+└─── [any template files or folders]
+│ [any other files]
+```
+
+Afterwards, you can copy/download it by using the copy flag.
+
+```sh
+cook create <name> --copy user/repo
+```
+
 #### Variables
 
 Cook's boilerplates aren't static. You can use variables inside of folder names, file names and the files' content.

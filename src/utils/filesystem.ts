@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 import walk from 'walk-sync';
 
-const defaultFolderPath = path.join(os.homedir(), '.cook');
+export const defaultFolderPath = path.join(os.homedir(), '.cook');
 
 // check whether a boilerplate exists
 export function BoilerplateExists(name: string) {
@@ -79,4 +79,8 @@ export function GenerateStructureFromTree(tree: any, targetDir: string) {
 
 export function RemoveBoilerplate(name: string) {
   fs.removeSync(path.join(defaultFolderPath, name));
+}
+
+export function DirectoryExists(p: string) {
+  return fs.pathExistsSync(path.join(process.cwd(), p));
 }
