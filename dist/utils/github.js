@@ -97,7 +97,7 @@ function CopyGithubTemplate(tree, targetBoilerplateName, name) {
                 case 0: return [4 /*yield*/, ScanFolderFromGithubTree(tree, targetBoilerplateName, name)];
                 case 1:
                     _a.sent();
-                    return [2 /*return*/];
+                    return [2 /*return*/, path_1.default.join(filesystem_1.defaultFolderPath, targetBoilerplateName)];
             }
         });
     });
@@ -140,7 +140,6 @@ function ScanFolderFromGithubTree(tree, targetBoilerplateName, name) {
                 case 1:
                     if (!(_i < tree_1.length)) return [3 /*break*/, 7];
                     item = tree_1[_i];
-                    console.log('fired');
                     relPath = item.path.split('template/')[1];
                     absPath = path_1.default.join(filesystem_1.defaultFolderPath, targetBoilerplateName, relPath);
                     if (!(item.type === 'file')) return [3 /*break*/, 3];
@@ -149,7 +148,6 @@ function ScanFolderFromGithubTree(tree, targetBoilerplateName, name) {
                 case 2:
                     content = _a.sent();
                     fs_extra_1.default.writeFileSync(absPath, content);
-                    console.log('file');
                     _a.label = 3;
                 case 3:
                     if (!(item.type === 'dir')) return [3 /*break*/, 6];

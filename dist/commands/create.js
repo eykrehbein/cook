@@ -85,8 +85,7 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                 }
                 return [4 /*yield*/, github_1.CopyGithubTemplate(githubTemplateStructure, name, flags.copy)];
             case 3:
-                _a.sent();
-                process.exit(0);
+                dirpath = _a.sent();
                 _a.label = 4;
             case 4:
                 console.log(chalk_1.default.greenBright("Copied '" + flags.copy + "' to create a new Boilerplate at " + dirpath));
