@@ -7,42 +7,42 @@ var fs_extra_1 = __importDefault(require("fs-extra"));
 var os_1 = __importDefault(require("os"));
 var path_1 = __importDefault(require("path"));
 var walk_sync_1 = __importDefault(require("walk-sync"));
-var defaultFolderPath = path_1.default.join(os_1.default.homedir(), '.cook');
+exports.defaultFolderPath = path_1.default.join(os_1.default.homedir(), '.cook');
 // check whether a boilerplate exists
 function BoilerplateExists(name) {
-    return fs_extra_1.default.existsSync(path_1.default.join(defaultFolderPath, name));
+    return fs_extra_1.default.existsSync(path_1.default.join(exports.defaultFolderPath, name));
 }
 exports.BoilerplateExists = BoilerplateExists;
 // copy an existing directory into a new boilerplate directory
 function CreateBoilerplateFromExistingDir(existingFolderPath, bpName) {
-    fs_extra_1.default.copySync(existingFolderPath, path_1.default.join(defaultFolderPath, bpName));
-    return path_1.default.join(defaultFolderPath, bpName);
+    fs_extra_1.default.copySync(existingFolderPath, path_1.default.join(exports.defaultFolderPath, bpName));
+    return path_1.default.join(exports.defaultFolderPath, bpName);
 }
 exports.CreateBoilerplateFromExistingDir = CreateBoilerplateFromExistingDir;
 // get a list of all boilerplates
 function GetBoilerplateList() {
-    return fs_extra_1.default.readdirSync(defaultFolderPath);
+    return fs_extra_1.default.readdirSync(exports.defaultFolderPath);
 }
 exports.GetBoilerplateList = GetBoilerplateList;
 // create empty boilerplate. Returns the folder's name
 function CreateEmptyBoilerplate(name) {
-    fs_extra_1.default.mkdirSync(path_1.default.join(defaultFolderPath, name));
-    return path_1.default.join(defaultFolderPath, name);
+    fs_extra_1.default.mkdirSync(path_1.default.join(exports.defaultFolderPath, name));
+    return path_1.default.join(exports.defaultFolderPath, name);
 }
 exports.CreateEmptyBoilerplate = CreateEmptyBoilerplate;
 // create the default folder that holds all boilerplates
 function CreateBoilerplateRootFolder() {
-    fs_extra_1.default.ensureDirSync(defaultFolderPath);
+    fs_extra_1.default.ensureDirSync(exports.defaultFolderPath);
 }
 exports.CreateBoilerplateRootFolder = CreateBoilerplateRootFolder;
 // get all files and folders in boilerplate
 function GetBoilerplateContentPaths(name) {
-    var treeArray = walk_sync_1.default(path_1.default.join(defaultFolderPath, name));
+    var treeArray = walk_sync_1.default(path_1.default.join(exports.defaultFolderPath, name));
     var tree = treeArray.map(function (p) {
         var isDir = fs_extra_1.default
-            .lstatSync(path_1.default.join(defaultFolderPath, name, p))
+            .lstatSync(path_1.default.join(exports.defaultFolderPath, name, p))
             .isDirectory();
-        var fullPath = path_1.default.join(defaultFolderPath, name, p);
+        var fullPath = path_1.default.join(exports.defaultFolderPath, name, p);
         var content;
         if (!isDir) {
             content = fs_extra_1.default.readFileSync(fullPath).toString();
@@ -78,6 +78,10 @@ function GenerateStructureFromTree(tree, targetDir) {
 }
 exports.GenerateStructureFromTree = GenerateStructureFromTree;
 function RemoveBoilerplate(name) {
-    fs_extra_1.default.removeSync(path_1.default.join(defaultFolderPath, name));
+    fs_extra_1.default.removeSync(path_1.default.join(exports.defaultFolderPath, name));
 }
 exports.RemoveBoilerplate = RemoveBoilerplate;
+function DirectoryExists(p) {
+    return fs_extra_1.default.pathExistsSync(path_1.default.join(process.cwd(), p));
+}
+exports.DirectoryExists = DirectoryExists;

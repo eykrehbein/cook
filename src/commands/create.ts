@@ -2,10 +2,16 @@ import chalk from 'chalk';
 import {
   BoilerplateExists,
   CreateEmptyBoilerplate,
-  CreateBoilerplateFromExistingDir
+  CreateBoilerplateFromExistingDir,
+  DirectoryExists
 } from '../utils/filesystem';
 
-export default (input: any, flags: any) => {
+import {
+  GetGithubTemplateStructure,
+  CopyGithubTemplate
+} from '../utils/github';
+
+export default async (input: any, flags: any) => {
   // name of the new boilerplate
   const name = input[1];
 
@@ -52,7 +58,28 @@ export default (input: any, flags: any) => {
 
   // if a copy-dir string is provided
 
-  const dirpath = CreateBoilerplateFromExistingDir(flags.copy, name);
+  // if the local directory exists, use it to create a new boilerplate
+  let dirpath;
+  if (DirectoryExists(flags.copy)) {
+    dirpath = CreateBoilerplateFromExistingDir(flags.copy, name);
+  } else {
+    const githubTemplateStructure = await GetGithubTemplateStructure(
+      flags.copy
+    );
+
+    if (githubTemplateStructure === null) {
+      console.log(
+        chalk.red(
+          `No local or remote template found for the path '${flags.copy}'`
+        )
+      );
+      process.exit(1);
+    }
+
+    await CopyGithubTemplate(githubTemplateStructure!, name, flags.copy);
+
+    process.exit(0);
+  }
 
   console.log(
     chalk.greenBright(
