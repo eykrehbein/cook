@@ -76,9 +76,11 @@ export default async (input: any, flags: any) => {
       process.exit(1);
     }
 
-    await CopyGithubTemplate(githubTemplateStructure!, name, flags.copy);
-
-    process.exit(0);
+    dirpath = await CopyGithubTemplate(
+      githubTemplateStructure!,
+      name,
+      flags.copy
+    );
   }
 
   console.log(
