@@ -1,4 +1,4 @@
-import prompt, { PromptObject } from 'prompts';
+import prompt from 'prompts';
 
 export async function PromptForVariables(
   names: string[]
