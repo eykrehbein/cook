@@ -3,10 +3,11 @@ import path from 'path';
 
 import {
   GetBoilerplateContentPaths,
-  GenerateStructureFromTree
+  GenerateStructureFromTree,
+  CheckForFileCollisions
 } from '../utils/filesystem';
 
-import { PromptForVariables } from '../utils/console';
+import { PromptForVariables, PromptOnCollision } from '../utils/console';
 
 export default async (input: any, flags: any) => {
   const boilerplateName = input[0];
@@ -41,7 +42,7 @@ export default async (input: any, flags: any) => {
 
   const regexName = new RegExp('{{(.*?)}}', 'gm');
   const regexContent = /c{{(.*?)}}/gim;
-  for (let treeItem of tree) {
+  for (let treeItem of tree!) {
     // check file and folder names
 
     const regexExecOnName = regexName.exec(treeItem.pathString);
@@ -108,7 +109,7 @@ export default async (input: any, flags: any) => {
   // replace all variables inside of file and folder names
   for (const v of variables) {
     let regex = new RegExp('{{\\s*' + v + '\\s*}}', 'gm');
-    for (let treeItem of tree) {
+    for (let treeItem of tree!) {
       treeItem.pathString = treeItem.pathString.replace(regex, getVar(v));
     }
   }
@@ -117,12 +118,25 @@ export default async (input: any, flags: any) => {
   for (const v of variables) {
     // 'c' in front of the regex in order to prevent collisions with other mustache like syntax that may occur in boilerplate files
     let regex = new RegExp('c{{\\s*' + v + '\\s*}}', 'gm');
-    for (let treeItem of tree) {
+    for (let treeItem of tree!) {
       if (treeItem.isDir === false) {
         treeItem.content = treeItem.content.replace(regex, getVar(v));
       }
     }
   }
+
+  // check if any files would be overwritten
+  const collides: boolean = CheckForFileCollisions(tree!, targetDir);
+
+  if (collides) {
+    const confirmed = await PromptOnCollision();
+    if (confirmed !== true) {
+      console.log(chalk.yellow('Cancelled.'));
+      process.exit(0);
+    }
+  }
+
+  // generate the file structure from the tree object
   GenerateStructureFromTree(tree, targetDir);
 
   console.log(
