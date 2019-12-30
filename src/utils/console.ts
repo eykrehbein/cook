@@ -14,3 +14,15 @@ export async function PromptForVariables(
 
   return response;
 }
+
+export async function PromptOnCollision(): Promise<boolean> {
+  const response = await prompt({
+    type: 'confirm',
+    name: 'value',
+    message:
+      'Cook will overwrite existing files in the target directory. Continue?',
+    initial: false
+  });
+
+  return <boolean>response.value;
+}

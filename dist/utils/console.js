@@ -62,3 +62,22 @@ function PromptForVariables(names) {
     });
 }
 exports.PromptForVariables = PromptForVariables;
+function PromptOnCollision() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, prompts_1.default({
+                        type: 'confirm',
+                        name: 'value',
+                        message: 'Cook will overwrite existing files in the target directory. Continue?',
+                        initial: false
+                    })];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.value];
+            }
+        });
+    });
+}
+exports.PromptOnCollision = PromptOnCollision;

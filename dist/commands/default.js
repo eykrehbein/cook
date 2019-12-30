@@ -44,9 +44,9 @@ var path_1 = __importDefault(require("path"));
 var filesystem_1 = require("../utils/filesystem");
 var console_1 = require("../utils/console");
 exports.default = (function (input, flags) { return __awaiter(void 0, void 0, void 0, function () {
-    var boilerplateName, targetDir, tree, variables, regexName, regexContent, _i, tree_1, treeItem, regexExecOnName, varName, regexMatchOnContent, _a, regexMatchOnContent_1, item, splitItem, varName, filledVariables, blankVariableNames, _b, filledVariables_1, v, promptResponse, _resKeys, _c, filledVariables_2, item, getVar, _d, variables_1, v, regex, _e, tree_2, treeItem, _f, variables_2, v, regex, _g, tree_3, treeItem;
-    return __generator(this, function (_h) {
-        switch (_h.label) {
+    var boilerplateName, targetDir, tree, variables, regexName, regexContent, _i, _a, treeItem, regexExecOnName, varName, regexMatchOnContent, _b, regexMatchOnContent_1, item, splitItem, varName, filledVariables, blankVariableNames, _c, filledVariables_1, v, promptResponse, _resKeys, _d, filledVariables_2, item, getVar, _e, variables_1, v, regex, _f, _g, treeItem, _h, variables_2, v, regex, _j, _k, treeItem, collides, confirmed;
+    return __generator(this, function (_l) {
+        switch (_l.label) {
             case 0:
                 boilerplateName = input[0];
                 targetDir = input[1];
@@ -69,8 +69,8 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                 variables = [];
                 regexName = new RegExp('{{(.*?)}}', 'gm');
                 regexContent = /c{{(.*?)}}/gim;
-                for (_i = 0, tree_1 = tree; _i < tree_1.length; _i++) {
-                    treeItem = tree_1[_i];
+                for (_i = 0, _a = tree; _i < _a.length; _i++) {
+                    treeItem = _a[_i];
                     regexExecOnName = regexName.exec(treeItem.pathString);
                     if (regexExecOnName !== null) {
                         varName = regexExecOnName[1].trimLeft().trimRight();
@@ -81,8 +81,8 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                     if (!treeItem.isDir) {
                         regexMatchOnContent = treeItem.content.match(regexContent);
                         if (regexMatchOnContent !== null) {
-                            for (_a = 0, regexMatchOnContent_1 = regexMatchOnContent; _a < regexMatchOnContent_1.length; _a++) {
-                                item = regexMatchOnContent_1[_a];
+                            for (_b = 0, regexMatchOnContent_1 = regexMatchOnContent; _b < regexMatchOnContent_1.length; _b++) {
+                                item = regexMatchOnContent_1[_b];
                                 splitItem = item;
                                 varName = splitItem
                                     .split('c{{')[1]
@@ -100,8 +100,8 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                     return { name: varString, value: flags[varString] || '' };
                 });
                 blankVariableNames = [];
-                for (_b = 0, filledVariables_1 = filledVariables; _b < filledVariables_1.length; _b++) {
-                    v = filledVariables_1[_b];
+                for (_c = 0, filledVariables_1 = filledVariables; _c < filledVariables_1.length; _c++) {
+                    v = filledVariables_1[_c];
                     if (v.value === '') {
                         blankVariableNames.push(v.name);
                     }
@@ -109,15 +109,15 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                 if (!(blankVariableNames.length > 0)) return [3 /*break*/, 2];
                 return [4 /*yield*/, console_1.PromptForVariables(blankVariableNames)];
             case 1:
-                promptResponse = _h.sent();
+                promptResponse = _l.sent();
                 _resKeys = Object.keys(promptResponse);
-                for (_c = 0, filledVariables_2 = filledVariables; _c < filledVariables_2.length; _c++) {
-                    item = filledVariables_2[_c];
+                for (_d = 0, filledVariables_2 = filledVariables; _d < filledVariables_2.length; _d++) {
+                    item = filledVariables_2[_d];
                     if (_resKeys.includes(item.name)) {
                         item.value = promptResponse[item.name];
                     }
                 }
-                _h.label = 2;
+                _l.label = 2;
             case 2:
                 getVar = function (name) {
                     for (var _i = 0, filledVariables_3 = filledVariables; _i < filledVariables_3.length; _i++) {
@@ -129,25 +129,37 @@ exports.default = (function (input, flags) { return __awaiter(void 0, void 0, vo
                     return '';
                 };
                 // replace all variables inside of file and folder names
-                for (_d = 0, variables_1 = variables; _d < variables_1.length; _d++) {
-                    v = variables_1[_d];
+                for (_e = 0, variables_1 = variables; _e < variables_1.length; _e++) {
+                    v = variables_1[_e];
                     regex = new RegExp('{{\\s*' + v + '\\s*}}', 'gm');
-                    for (_e = 0, tree_2 = tree; _e < tree_2.length; _e++) {
-                        treeItem = tree_2[_e];
+                    for (_f = 0, _g = tree; _f < _g.length; _f++) {
+                        treeItem = _g[_f];
                         treeItem.pathString = treeItem.pathString.replace(regex, getVar(v));
                     }
                 }
                 // replace all variables in all files' content
-                for (_f = 0, variables_2 = variables; _f < variables_2.length; _f++) {
-                    v = variables_2[_f];
+                for (_h = 0, variables_2 = variables; _h < variables_2.length; _h++) {
+                    v = variables_2[_h];
                     regex = new RegExp('c{{\\s*' + v + '\\s*}}', 'gm');
-                    for (_g = 0, tree_3 = tree; _g < tree_3.length; _g++) {
-                        treeItem = tree_3[_g];
+                    for (_j = 0, _k = tree; _j < _k.length; _j++) {
+                        treeItem = _k[_j];
                         if (treeItem.isDir === false) {
                             treeItem.content = treeItem.content.replace(regex, getVar(v));
                         }
                     }
                 }
+                collides = filesystem_1.CheckForFileCollisions(tree, targetDir);
+                if (!collides) return [3 /*break*/, 4];
+                return [4 /*yield*/, console_1.PromptOnCollision()];
+            case 3:
+                confirmed = _l.sent();
+                if (confirmed !== true) {
+                    console.log(chalk_1.default.yellow('Cancelled.'));
+                    process.exit(0);
+                }
+                _l.label = 4;
+            case 4:
+                // generate the file structure from the tree object
                 filesystem_1.GenerateStructureFromTree(tree, targetDir);
                 console.log(chalk_1.default.greenBright("Succesfully created " + chalk_1.default.bold(boilerplateName) + " in " + targetDir));
                 return [2 /*return*/];
