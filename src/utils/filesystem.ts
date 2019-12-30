@@ -3,6 +3,13 @@ import os from 'os';
 import path from 'path';
 import walk from 'walk-sync';
 
+export type TreeItem = {
+  isDir: boolean;
+  pathString: string;
+  fullPath: string;
+  content: string;
+};
+
 export const defaultFolderPath = path.join(os.homedir(), '.cook');
 
 // check whether a boilerplate exists
@@ -35,17 +42,17 @@ export function CreateBoilerplateRootFolder() {
 }
 
 // get all files and folders in boilerplate
-export function GetBoilerplateContentPaths(name: string): any {
+export function GetBoilerplateContentPaths(name: string): TreeItem[] | null {
   if (!fs.existsSync(path.join(defaultFolderPath, name))) {
     return null;
   }
   const treeArray = walk(path.join(defaultFolderPath, name));
-  const tree = treeArray.map(p => {
+  const tree: TreeItem[] = treeArray.map(p => {
     const isDir = fs
       .lstatSync(path.join(defaultFolderPath, name, p))
       .isDirectory();
     const fullPath = path.join(defaultFolderPath, name, p);
-    let content;
+    let content: string = '';
     if (!isDir) {
       content = fs.readFileSync(fullPath).toString();
     }
@@ -86,4 +93,18 @@ export function RemoveBoilerplate(name: string) {
 
 export function DirectoryExists(p: string) {
   return fs.pathExistsSync(path.join(process.cwd(), p));
+}
+
+// returns boolean whether any files or folders within the recipy would overwrite existing files
+export function CheckForFileCollisions(
+  tree: TreeItem[],
+  targetDir: string
+): boolean {
+  for (const treeItem of tree) {
+    const targetPath = path.join(targetDir, treeItem.pathString);
+    if (fs.existsSync(targetPath)) {
+      return true;
+    }
+  }
+  return false;
 }

@@ -46,7 +46,7 @@ function GetBoilerplateContentPaths(name) {
             .lstatSync(path_1.default.join(exports.defaultFolderPath, name, p))
             .isDirectory();
         var fullPath = path_1.default.join(exports.defaultFolderPath, name, p);
-        var content;
+        var content = '';
         if (!isDir) {
             content = fs_extra_1.default.readFileSync(fullPath).toString();
         }
@@ -88,3 +88,15 @@ function DirectoryExists(p) {
     return fs_extra_1.default.pathExistsSync(path_1.default.join(process.cwd(), p));
 }
 exports.DirectoryExists = DirectoryExists;
+// returns boolean whether any files or folders within the recipy would overwrite existing files
+function CheckForFileCollisions(tree, targetDir) {
+    for (var _i = 0, tree_2 = tree; _i < tree_2.length; _i++) {
+        var treeItem = tree_2[_i];
+        var targetPath = path_1.default.join(targetDir, treeItem.pathString);
+        if (fs_extra_1.default.existsSync(targetPath)) {
+            return true;
+        }
+    }
+    return false;
+}
+exports.CheckForFileCollisions = CheckForFileCollisions;
