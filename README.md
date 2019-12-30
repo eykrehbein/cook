@@ -61,7 +61,7 @@ npm install -g @eyk/cook
 
 ## Usage
 
-#### Creating a Boilerplate
+### Creating a Boilerplate
 
 All boilerplates are stored in a newly created directory at `HOMEDIR/.cook`. You can create a new boilerplate by either creating a folder in this directory or using the following command.
 
@@ -83,7 +83,7 @@ cook create test --copy
 cook create test --copy preparedFolder/
 ```
 
-#### Cloning Boilerplates from Github
+### Cloning Boilerplates from Github
 
 The remote boilerplate needs to be stored inside a folder called `template`.
 
@@ -99,7 +99,7 @@ Afterwards, you can copy/download it by using the copy flag.
 cook create <name> --copy user/repo
 ```
 
-#### Variables
+### Variables
 
 Cook's boilerplates aren't static. You can use variables inside of folder names, file names and the files' content.
 
@@ -136,7 +136,7 @@ Command:
 cook create rc --copy my-boilerplate
 ```
 
-#### Applying Boilerplates
+### Applying Boilerplates
 
 To apply a boilerplate, use the following command.
 
@@ -148,7 +148,7 @@ This will copy the named boilerplate into the target dir (or, if not specified, 
 
 If you have used any variables, you can specify their value by using flags.
 
-Optionally, you are able to not use any flags to set variables. You'll be prompted to fill in a value for any missing variable flag.
+> Optionally, you are able to not use any flags to set variables. You'll be prompted to fill in a value for any missing variable flag.
 
 _Example:_
 
@@ -162,7 +162,7 @@ cook <name> [targetDir] --name HelloWorld --counter 0
 
 This will replace all occurrences of `name` and `counter` inside of pathnames and content.
 
-#### Listing existing Boilerplates
+### Listing existing Boilerplates
 
 If you want to get a list of all existing boilerplates, you can use the following command.
 
@@ -170,7 +170,7 @@ If you want to get a list of all existing boilerplates, you can use the followin
 cook list
 ```
 
-#### Removing Boilerplates
+### Removing Boilerplates
 
 To remove a boilerplate, use the following command.
 
