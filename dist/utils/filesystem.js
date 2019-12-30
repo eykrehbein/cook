@@ -21,7 +21,15 @@ function CreateBoilerplateFromExistingDir(existingFolderPath, bpName) {
 exports.CreateBoilerplateFromExistingDir = CreateBoilerplateFromExistingDir;
 // get a list of all boilerplates
 function GetBoilerplateList() {
-    return fs_extra_1.default.readdirSync(exports.defaultFolderPath);
+    var dirsOnly = [];
+    var allPaths = fs_extra_1.default.readdirSync(exports.defaultFolderPath);
+    for (var _i = 0, allPaths_1 = allPaths; _i < allPaths_1.length; _i++) {
+        var p = allPaths_1[_i];
+        if (fs_extra_1.default.lstatSync(path_1.default.join(exports.defaultFolderPath, p)).isDirectory()) {
+            dirsOnly.push(p);
+        }
+    }
+    return dirsOnly;
 }
 exports.GetBoilerplateList = GetBoilerplateList;
 // create empty boilerplate. Returns the folder's name

@@ -20,7 +20,15 @@ export function CreateBoilerplateFromExistingDir(
 }
 // get a list of all boilerplates
 export function GetBoilerplateList() {
-  return fs.readdirSync(defaultFolderPath);
+  let dirsOnly: string[] = [];
+  const allPaths = fs.readdirSync(defaultFolderPath);
+
+  for (const p of allPaths) {
+    if (fs.lstatSync(path.join(defaultFolderPath, p)).isDirectory()) {
+      dirsOnly.push(p);
+    }
+  }
+  return dirsOnly;
 }
 
 // create empty boilerplate. Returns the folder's name
